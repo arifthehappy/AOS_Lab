@@ -82,6 +82,10 @@ void exeCmdPiped(char ** parsed, char ** parsedpipe){
             }
         }else{
             // parent process execution
+            close(pipefd[0]);
+            close(pipefd[1]);
+            
+            // wait for both child to finish            
             wait(NULL);
             wait(NULL);
         }
