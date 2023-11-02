@@ -33,8 +33,8 @@ int main(int ac, char **argv){
         return (-1);
     }
 
-    /*welcome message for RFShell*/
-    printf("Welcome to the RFShell!\n");
+    /*welcome message for ShellKhan*/
+    printf("Welcome to the ShellKhan!\n");
 
 
     /* Create a loop for the shell's prompt */

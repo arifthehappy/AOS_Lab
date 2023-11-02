@@ -9,7 +9,15 @@ void execmd(char **argv){
         /* get the command */
         command = argv[0];
 
+        // if command is exit, exit the shell
+        if (strcmp(command, "exit") == 0){
+                printf("GoodBye...\nExiting shell....\n");
+            exit(0);
+        }
+
+        // printf("command: %s\n", command);
         actual_command = get_location(command);
+        // printf("actual command: %s\n", actual_command);
 
         pid = fork();
 

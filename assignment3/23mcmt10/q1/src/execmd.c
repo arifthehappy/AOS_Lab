@@ -10,6 +10,12 @@ void exeCmd(char **argv){
         /* get the command */
         command = argv[0];
 
+        // if command is exit, exit the shell
+        if (strcmp(command, "exit") == 0){
+                printf("GoodBye...\nExiting shell....\n");
+            exit(0);
+        }
+
         actual_command = get_location(command);
 
         pid = fork();
@@ -19,6 +25,37 @@ void exeCmd(char **argv){
         }
         else if (pid == 0){
             /* child process */
+
+            //check for output redirection
+            int i = 0;
+        int output_redirection = 0;
+        while (argv[i] != NULL) {
+            if (strcmp(argv[i], ">") == 0) {
+                output_redirection = 1;
+                break;
+            }
+            i++;
+        }
+
+        if (output_redirection) {
+            // Output redirection detected
+            int file_descriptor = open(argv[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+            if (file_descriptor < 0) {
+                perror("\nError opening file for redirection");
+                exit(0);
+            }
+
+            // Redirect standard output to the file
+            dup2(file_descriptor, STDOUT_FILENO);
+
+            // Close the file descriptor
+            close(file_descriptor);
+
+            // Replace '>' and the filename with NULL to avoid them being passed as arguments
+            argv[i] = NULL;
+            argv[i + 1] = NULL;
+        }
+
             /* execute the command with execve */
             if (execve(actual_command, argv, NULL) == -1){
                 perror("Error:");
@@ -58,7 +95,13 @@ void exeCmdPiped(char ** parsed, char ** parsedpipe){
         dup2(pipefd[1], STDOUT_FILENO);
         close(pipefd[1]);
 
-        if(execvp(parsed[0], parsed) < 0){
+        char *actual_command = get_location(parsed[0]);
+        if (actual_command == NULL) {
+            perror("\nError: could not find command 1..");
+            exit(0);
+        }
+
+        if(execve(actual_command, parsed, NULL) < 0){
             perror("\nError: could not execute command 1..");
             exit(0);
         }
@@ -76,7 +119,14 @@ void exeCmdPiped(char ** parsed, char ** parsedpipe){
             close(pipefd[1]);
             dup2(pipefd[0], STDIN_FILENO);
             close(pipefd[0]);
-            if(execvp(parsedpipe[0], parsedpipe) < 0){
+
+            char *actual_command = get_location(parsedpipe[0]);
+            if (actual_command == NULL) {
+                perror("\nError: could not find command 2..");
+                exit(0);
+            }
+
+            if(execve(actual_command, parsedpipe, NULL) < 0){
                 perror("\nError: could not execute command 2..");
                 exit(0);
             }

@@ -1,0 +1,39 @@
+.TH wc 1 "October 2023" "User Commands"
+
+.SH NAME
+wc \- display word, line, and byte counts for each file
+
+.SH SYNOPSIS
+.B wc
+[\-lwc] [FILE]...
+
+.SH DESCRIPTION
+Displays the number of lines, words, and bytes in each specified FILE, or from the standard input (if no FILE is specified).
+
+.SH OPTIONS
+.TP
+.B \-l
+Count lines.
+
+.TP
+.B \-w
+Count words.
+
+.TP
+.B \-c
+Count bytes.
+
+.SH EXAMPLES
+Display the number of lines, words, and bytes in the file "example.txt":
+.B
+.PP
+.B wc -lwc example.txt
+
+.SH SEE ALSO
+.BR ls (1)
+
+.SH AUTHOR
+MD ARIF KHAN.
+
+.SH REPORTING BUGS
+Report bugs to: arifthehappy@gmail.com.

@@ -30,10 +30,10 @@ int processString(char* str, char **parsed, char **parsedpipe){
         parseSpace(str, parsed);
     }
 
-    if(ownCmdHandler(parsed)){
-        return 0; // own command
-    }
-    else{
+    // if(ownCmdHandler(parsed)){
+    //     return 0; // own command
+    // }
+    // else{
         return 1 + piped; // system command
-    }
+    // }
 }
