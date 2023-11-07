@@ -1,0 +1,58 @@
+Q1
+
+wsl
+clone doxygen
+create build directory 
+sudo apt install cmake
+install c++ compiler (g++) sudo apt install g++
+sudo apt install flex
+sudo apt install bison
+
+install doxygen using cmake
+
+make
+
+sudo make install
+
+rfubuntu@DELLVostro:~/doxygen/build$ sudo make install                             [sudo] password for rfubuntu:                                                      [  1%] Built target md5                                                            [  1%] Built target lodepng                                                        [ 10%] Built target mscgen                                                         [ 13%] Built target spdlog                                                         [ 13%] Built target sqlite3                                                        [ 13%] Checking the git repository for changes...                                  [ 13%] Built target check_git_repository                                           [ 13%] Checking the doxygen version for changes...                                 [ 13%] Built target check_doxygen_version                                          [ 14%] Built target doxygen_version                                                [ 16%] Built target xml                                                            [ 17%] Built target generate_configvalues_header                                   [ 20%] Built target vhdlparser                                                     [ 26%] Built target doxycfg                                                        [ 98%] Built target doxymain                                                       [100%] Built target doxygen                                                        Install the project...                                                             -- Install configuration: "Release"                                                -- Installing: /usr/local/bin/doxygen 
+
+
+
+go to xv6folder
+rfubuntu@DELLVostro:~$ cd xv6-public/   
+
+create config file doxygen -g Doxyfile
+
+rfubuntu@DELLVostro:~/xv6-public$ doxygen -g Doxyfile                                                                                                                                                                                                    Configuration file 'Doxyfile' created.                                                                                                                                Now edit the configuration file and enter                                                                                                                               doxygen                                                                                                                                                             to generate the documentation for your project  
+
+
+Edit Doxyfile (nano Doxyfile)
+- project name = xv6 Documentation
+- project number = 0.1
+- create subdirs =  YES
+- allow unicode_names = YES
+- Inline_inherited_memb = YES
+- BUILTIN_STL_SUport = YES
+- CPP_CLI_SUPPORT = YES
+- DISTRIBUTE_GROUP_DOC = YES
+- NUM_PROC_THREADS = 4
+- TIMESTAMP - YES
+- Extract_ALL = YES
+- EXTRACT_PRIVATE = YES
+- EXTRACT_PACKAGE = YES
+- EXTRACT_STATIC = YES
+- EXTRACT_LOCAL_METHODS = YES
+- SORT_BRIEF_DOCS = YES
+- Recursive = YES
+- SOURCE_BROWSER = YES
+- INLINE_SOURCES = YES
+- REDERENCED BY RELATION = YES
+- CALL_GRAPH = YES
+- CALLER_GRAPH = YES
+- INTERACTIVE_SVG = YES
+
+
+
+generate documentation -> (doxygen Doxyfile)
+
+
